@@ -1,0 +1,3 @@
+rootProject.name='LoganKit'
+include ':app'
+include ':ilog'
