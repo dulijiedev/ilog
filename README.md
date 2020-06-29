@@ -1,4 +1,4 @@
-### Logan日志封装
+### Logan日志封装 [![](https://jitpack.io/v/sdohubs/ilog.svg)](https://jitpack.io/#sdohubs/ilog)
 
 整体类图结构如下
 
@@ -125,7 +125,7 @@ fun s()
 添加依赖库
 
 ```
-
+implementation 'com.github.sdohubs:ilog:[![](https://jitpack.io/v/sdohubs/ilog.svg)](https://jitpack.io/#sdohubs/ilog)'
 ```
 
 在Application 中初始化
