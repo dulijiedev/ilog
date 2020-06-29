@@ -125,7 +125,7 @@ fun s()
 添加依赖库
 
 ```
-implementation 'com.dolj.ilog:ilog:1.0.1'
+
 ```
 
 在Application 中初始化
