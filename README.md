@@ -1,8 +1,7 @@
-### Logan日志封装
+### Logan日志封装 [![](https://jitpack.io/v/sdohubs/ilog.svg)](https://jitpack.io/#sdohubs/ilog)
 
 整体类图结构如下
-
-![Class Model](C:\Users\GIChain\Desktop\Class Model.png)
+![类图](https://raw.githubusercontent.com/sdohubs/ilog/master/log.png)
 
 ##### 1.Level日志等级
 
@@ -123,9 +122,17 @@ fun s()
 ##### 6.使用方式
 
 添加依赖库
+```
+allprojects {
+		repositories {
+			...
+			maven { url 'https://jitpack.io' }
+		}
+	}
+```
 
 ```
-implementation 'com.dolj.ilog:ilog:1.0.1'
+implementation 'com.github.sdohubs:ilog:1.0.0'
 ```
 
 在Application 中初始化
