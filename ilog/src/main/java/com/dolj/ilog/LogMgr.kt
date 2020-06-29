@@ -94,21 +94,21 @@ object LogMgr {
      * @param application
      */
     fun init(application: Application, sendUrl: String) {
-        val config = LoganConfig.Builder()
-            .setCachePath(application.filesDir.absolutePath)
-            .setPath(
-                (application.getExternalFilesDir(null)?.absolutePath
-                        + File.separator) + "logan_v1"
-            )
-            .setEncryptKey16("0123456789012345".toByteArray())
-            .setEncryptIV16("0123456789012345".toByteArray())
-            .setMaxFile(100)
-            .setDay(1)
-            .build()
-        Logan.init(config)
-        this.SEND_URL = sendUrl
-        this.app = application
-        path = application.getExternalFilesDir(null)?.absolutePath + File.separator + "logan_v1"
+//        val config = LoganConfig.Builder()
+//            .setCachePath(application.filesDir.absolutePath)
+//            .setPath(
+//                (application.getExternalFilesDir(null)?.absolutePath
+//                        + File.separator) + "logan_v1"
+//            )
+//            .setEncryptKey16("0123456789012345".toByteArray())
+//            .setEncryptIV16("0123456789012345".toByteArray())
+//            .setMaxFile(100)
+//            .setDay(1)
+//            .build()
+//        Logan.init(config)
+//        this.SEND_URL = sendUrl
+//        this.app = application
+//        path = application.getExternalFilesDir(null)?.absolutePath + File.separator + "logan_v1"
     }
 
     /**
