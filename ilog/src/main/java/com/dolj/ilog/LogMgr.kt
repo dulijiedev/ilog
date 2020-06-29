@@ -58,30 +58,42 @@ fun LogMgr.iLog(logEntity: LogEntity) {
 /**
  * log管理
  */
-object LogMgr :LogInterface{
+object LogMgr {
 
-    override var MIN_LEVEL = Level.Debug
+    private var MIN_LEVEL = Level.Debug
 
     /**
      * 上传url
      */
-    override var SEND_URL: String = ""
+    private var SEND_URL: String? = null
 
     /**
      * application
      */
-    override var app: Application? =null
+    private var app: Application? = null
 
     /**
      * 日志文件本地路径
      */
-    override var path: String? = null
+    private var path: String? = null
+
+    fun setPath(path: String) {
+        this.path = path
+    }
+
+    fun setSendUrl(url: String) {
+        this.SEND_URL = url
+    }
+
+    fun setApp(application: Application) {
+        this.app = application
+    }
 
     /**
      *初始化日志 在Application中
      * @param application
      */
-    override fun init(application: Application, sendUrl: String) {
+    fun init(application: Application, sendUrl: String) {
         val config = LoganConfig.Builder()
             .setCachePath(application.filesDir.absolutePath)
             .setPath(
@@ -110,19 +122,26 @@ object LogMgr :LogInterface{
      * 写入log
      * @param logEntity log实体
      */
-    override fun write(logEntity: LogEntity) {
+    fun write(logEntity: LogEntity) {
         val log = logEntity.build()
         if (log.level != null && log.level!!.value >= MIN_LEVEL.value) {
             val logStr =
                 "[${log.majorModule}][${log.mark}][${log.subModule}](${log.result}) ${if (log.params != null) "(${log.params})" else ""} $logEntity"
             println(logStr)
-            Logan.w(logStr, log.level?.value ?: 1)
+
+//            Logan.w(logStr, log.level?.value ?: 1)
+
         }
     }
 
-    override fun write(logStr: String, level: Level?) {
+    /**
+     * 写入日志
+     */
+    fun write(logStr: String, level: Level?) {
         if (level != null && level.value >= MIN_LEVEL.value) {
-            Logan.w(logStr, level.value)
+
+//            Logan.w(logStr, level.value)
+
         }
     }
 
@@ -130,28 +149,28 @@ object LogMgr :LogInterface{
      * 上传文件
      */
     @SuppressLint("SimpleDateFormat", "LogNotTimber")
-    override fun s() {
+    fun s() {
         val map = Logan.getAllFilesInfo()
         if (!map.isNullOrEmpty()) {
-            Logan.s(
-                SEND_URL,
-                SimpleDateFormat("yyyy-MM-dd").format(Date()),
-                app!!.applicationContext.packageName,
-                "Android",
-                getModel(),
-                android.os.Build.VERSION.RELEASE,
-                getVersionName(app!!.applicationContext)
-            ) { statusCode, data ->
-                val resultData = if (data != null) String(data) else ""
-                Log.d(TAG, "upload result, httpCode: $statusCode, details: $resultData")
-                io.reactivex.Observable.just(statusCode)
-                    .compose(observableIO2Main())
-                    .subscribe {
-                        val text = if (it == 200) "上传成功" else "上传失败 $resultData"
-                        toast(app!!.applicationContext, Toast.LENGTH_SHORT) { text }
-                        deleteFile()
-                    }
-            }
+//            Logan.s(
+//                SEND_URL,
+//                SimpleDateFormat("yyyy-MM-dd").format(Date()),
+//                app!!.applicationContext.packageName,
+//                "Android",
+//                getModel(),
+//                android.os.Build.VERSION.RELEASE,
+//                getVersionName(app!!.applicationContext)
+//            ) { statusCode, data ->
+//                val resultData = if (data != null) String(data) else ""
+//                Log.d(TAG, "upload result, httpCode: $statusCode, details: $resultData")
+//                io.reactivex.Observable.just(statusCode)
+//                    .compose(observableIO2Main())
+//                    .subscribe {
+//                        val text = if (it == 200) "上传成功" else "上传失败 $resultData"
+//                        toast(app!!.applicationContext, Toast.LENGTH_SHORT) { text }
+//                        deleteFile()
+//                    }
+//            }
         } else {
             toast(app!!.applicationContext, Toast.LENGTH_SHORT) { "暂无日志信息" }
         }
@@ -161,7 +180,7 @@ object LogMgr :LogInterface{
      * 刪除本地log文件
      */
     @SuppressLint("CheckResult")
-    override fun deleteFile() {
+    fun deleteFile() {
         io.reactivex.Observable.create<Boolean> {
             if (path != null) {
                 val file = File(path!!)
