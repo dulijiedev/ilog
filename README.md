@@ -116,7 +116,7 @@ fun s()
 此方法用于日志文件的刪除，清理。
 
 ```
- fun deleteLoganFile()
+ fun deleteFile()
 ```
 
 ##### 6.使用方式
@@ -142,3 +142,4 @@ const val url = "http://192.168.1.189:9999/logan/upload.json"
 LogMgr.init(application,url)
 ```
 
+如果想要实现对应日志库的功能，需要修改LogMgr内初始化/写入/刪除/上传等对应的库方法，以此实现日志上传功能
