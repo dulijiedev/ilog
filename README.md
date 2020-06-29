@@ -1,7 +1,7 @@
 ### Logan日志封装 [![](https://jitpack.io/v/sdohubs/ilog.svg)](https://jitpack.io/#sdohubs/ilog)
 
 整体类图结构如下
-https://raw.githubusercontent.com/sdohubs/ilog/master/log.png
+![类图](https://raw.githubusercontent.com/sdohubs/ilog/master/log.png)
 
 ##### 1.Level日志等级
 
