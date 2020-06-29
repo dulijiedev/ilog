@@ -173,7 +173,7 @@ object LogMgr {
      * 刪除本地log文件
      */
     @SuppressLint("CheckResult")
-    private fun deleteLoganFile() {
+    fun deleteLoganFile() {
         io.reactivex.Observable.create<Boolean> {
             if (path != null) {
                 val file = File(path!!)
