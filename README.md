@@ -123,9 +123,17 @@ fun s()
 ##### 6.使用方式
 
 添加依赖库
+```
+allprojects {
+		repositories {
+			...
+			maven { url 'https://jitpack.io' }
+		}
+	}
+```
 
 ```
-implementation 'com.github.sdohubs:ilog:[![](https://jitpack.io/v/sdohubs/ilog.svg)](https://jitpack.io/#sdohubs/ilog)'
+implementation 'com.github.sdohubs:ilog:1.0.0'
 ```
 
 在Application 中初始化
