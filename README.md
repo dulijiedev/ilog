@@ -2,7 +2,7 @@
 
 整体类图结构如下
 ![类图](https://raw.githubusercontent.com/sdohubs/ilog/master/log.png)
-
+iOS实现方式见 https://github.com/henryhongli/iLogKit.git
 ##### 1.Level日志等级
 
 debug(一般)，Info(正常)，Warn(异常)，Error(错误)
