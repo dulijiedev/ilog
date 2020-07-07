@@ -8,6 +8,9 @@ interface LogEntity {
     fun build(): BaseLog
 
     fun iLog() {
-        LogMgr.iLog(this)
+//        LogMgr.iLog(this)
+        MyLogMgr.iLog(this)
     }
+
+    fun toMap(): Map<String, Any>
 }

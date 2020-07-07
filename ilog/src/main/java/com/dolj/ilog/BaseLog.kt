@@ -33,7 +33,7 @@ class BaseLog(builder: Builder) {
     /**
      * 参数/请求参数等
      */
-    var params: String? = null
+    var params: Map<String,Any>? = null
 
     init {
         this.level = builder.getLevel()
@@ -49,8 +49,8 @@ class BaseLog(builder: Builder) {
         private var majorModule: String? = null
         private var subModule: String? = null
         private var mark: String = "123"
-        private var result: String? = null
-        private var params: String? = null
+        private var result: Result<String> = Result.success("操作成功")
+        private var params: Map<String,Any>? = null
 
         fun setLevel(level: Level?): Builder {
             this.level = level
@@ -61,22 +61,22 @@ class BaseLog(builder: Builder) {
             return this.level
         }
 
-        fun setParams(params: String?): Builder {
+        fun setParams(params: Map<String,Any>?): Builder {
             this.params = params
             return this
         }
 
-        fun getParams(): String? {
+        fun getParams(): Map<String,Any>? {
             return this.params
         }
 
-        fun setResult(result: String?): Builder {
+        fun setResult(result:  Result<String>): Builder {
             this.result = result
             return this
         }
 
-        fun getResult(): String? {
-            return this.result
+        fun getResult():  String? {
+            return result.getOrElse { it->it.message }
         }
 
         fun setMajorModule(majorModule: String?): Builder {

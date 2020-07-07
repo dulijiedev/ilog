@@ -3,6 +3,7 @@ package com.dolj.ilog
 import org.junit.Test
 
 import org.junit.Assert.*
+import java.lang.Exception
 
 /**
  * Example local unit test, which will execute on the development machine (host).
@@ -22,20 +23,25 @@ class ExampleUnitTest {
                 .setLevel(Level.Debug)
                 .setMajorModule("登录")
                 .setMark("uid")
-                .setParams("{username:String,password:String}")
+                .setParams(toMap())
                 .setSubModule("快捷登录")
-                .setResult(LogResult.Failure.desc("1111"))
+                .setResult(Result.failure(Exception("操作失败,原因：我也不知道")))
+//                .setResult(Result.success("操作成功"))
                 .build()
         }
 
+        override fun toMap(): Map<String, Any> {
+            return mapOf("userId" to userId, "age" to age, "active" to active)
+        }
+
         override fun toString(): String {
-            return "LoginData(userId='$userId', age=$age, active=$active)"
+            return "{userId='$userId', age=$age, active=$active}"
         }
     }
 
     @Test
     fun testLog(){
         val data = LoginData("1111", 18, 1)
-//        data.iLog()
+        data.iLog()
     }
 }
