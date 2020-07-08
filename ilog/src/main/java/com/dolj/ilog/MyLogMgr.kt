@@ -129,7 +129,9 @@ object MyLogMgr {
             val logStr =
                 "[${log.majorModule}][${log.mark}][${log.subModule}](${log.result}) ${if (log.params != null) JSONObject(log.params).toString()  else ""} $logEntity"
             println(logStr)
-            Logan.w(logStr, log.level?.value ?: 1)
+//            Logan.w(logStr, log.level?.value ?: 1)
+        }else{
+            println("当前log日志等级为:${log.level?.name}:${log.level?.value},日志写入最低等级：${MIN_LEVEL.name}:${MIN_LEVEL.value} 日志被拦截")
         }
     }
 

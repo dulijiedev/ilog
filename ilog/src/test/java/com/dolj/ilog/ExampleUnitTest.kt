@@ -43,5 +43,7 @@ class ExampleUnitTest {
     fun testLog(){
         val data = LoginData("1111", 18, 1)
         data.iLog()
+        MyLogMgr.setLevel(Level.Info)
+        data.iLog()
     }
 }
