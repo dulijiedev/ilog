@@ -1,4 +1,5 @@
-### Logan日志封装 [![](https://jitpack.io/v/sdohubs/ilog.svg)](https://jitpack.io/#sdohubs/ilog)
+### Logan日志封装 
+[![](https://jitpack.io/v/sdohubs/ilog.svg)](https://jitpack.io/#sdohubs/ilog)
 
 整体类图结构如下
 ![类图](https://raw.githubusercontent.com/sdohubs/ilog/master/log.png)
