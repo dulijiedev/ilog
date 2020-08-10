@@ -163,12 +163,12 @@ object MyLogMgr {
                     .compose(observableIO2Main())
                     .subscribe {
                         val text = if (it == 200) "上传成功" else "上传失败 $resultData"
-                        toast(app!!.applicationContext, Toast.LENGTH_SHORT) { text }
+//                        toast(app!!.applicationContext, Toast.LENGTH_SHORT) { text }
                         deleteLoganFile()
                     }
             }
         } else {
-            toast(app!!.applicationContext, Toast.LENGTH_SHORT) { "暂无日志信息" }
+//            toast(app!!.applicationContext, Toast.LENGTH_SHORT) { "暂无日志信息" }
         }
     }
 
@@ -188,7 +188,7 @@ object MyLogMgr {
             }
         }.compose(observableIO2Main())
             .subscribe {
-                toast(app!!.applicationContext, Toast.LENGTH_SHORT) { "日志文件已删除" }
+//                toast(app!!.applicationContext, Toast.LENGTH_SHORT) { "日志文件已删除" }
             }
     }
 }

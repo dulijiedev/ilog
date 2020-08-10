@@ -138,7 +138,7 @@ object WalletLogMgr {
                     }
             }
         } else {
-            toast(app!!.applicationContext, Toast.LENGTH_SHORT) { "暂无日志信息" }
+//            toast(app!!.applicationContext, Toast.LENGTH_SHORT) { "暂无日志信息" }
         }
     }
 
@@ -158,7 +158,7 @@ object WalletLogMgr {
             }
         }.compose(observableIO2Main())
             .subscribe {
-                toast(app!!.applicationContext, Toast.LENGTH_SHORT) { "日志文件已删除" }
+//                toast(app!!.applicationContext, Toast.LENGTH_SHORT) { "日志文件已删除" }
             }
     }
 }
