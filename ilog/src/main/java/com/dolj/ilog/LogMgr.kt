@@ -7,7 +7,7 @@ import android.util.Log
 import android.widget.Toast
 import com.dianping.logan.Logan
 import com.dianping.logan.LoganConfig
-import io.reactivex.Observable.just
+import io.reactivex.Observable
 import java.io.File
 import java.text.SimpleDateFormat
 import java.util.*
@@ -94,21 +94,21 @@ object LogMgr {
      * @param application
      */
     fun init(application: Application, sendUrl: String) {
-//        val config = LoganConfig.Builder()
-//            .setCachePath(application.filesDir.absolutePath)
-//            .setPath(
-//                (application.getExternalFilesDir(null)?.absolutePath
-//                        + File.separator) + "logan_v1"
-//            )
-//            .setEncryptKey16("0123456789012345".toByteArray())
-//            .setEncryptIV16("0123456789012345".toByteArray())
-//            .setMaxFile(100)
-//            .setDay(1)
-//            .build()
-//        Logan.init(config)
-//        this.SEND_URL = sendUrl
-//        this.app = application
-//        path = application.getExternalFilesDir(null)?.absolutePath + File.separator + "logan_v1"
+        val config = LoganConfig.Builder()
+            .setCachePath(application.filesDir.absolutePath)
+            .setPath(
+                (application.getExternalFilesDir(null)?.absolutePath
+                        + File.separator) + "logan_v1"
+            )
+            .setEncryptKey16("0123456789012345".toByteArray())
+            .setEncryptIV16("0123456789012345".toByteArray())
+            .setMaxFile(100)
+            .setDay(1)
+            .build()
+        Logan.init(config)
+        this.SEND_URL = sendUrl
+        this.app = application
+        path = application.getExternalFilesDir(null)?.absolutePath + File.separator + "logan_v1"
     }
 
     /**
@@ -128,9 +128,7 @@ object LogMgr {
             val logStr =
                 "[${log.majorModule}][${log.mark}][${log.subModule}](${log.result}) ${if (log.params != null) "(${log.params})" else ""} $logEntity"
             println(logStr)
-
-//            Logan.w(logStr, log.level?.value ?: 1)
-
+            Logan.w(logStr, log.level?.value ?: 1)
         }
     }
 
@@ -139,9 +137,7 @@ object LogMgr {
      */
     fun write(logStr: String, level: Level?) {
         if (level != null && level.value >= MIN_LEVEL.value) {
-
-//            Logan.w(logStr, level.value)
-
+            Logan.w(logStr, level.value)
         }
     }
 
@@ -152,27 +148,27 @@ object LogMgr {
     fun s() {
         val map = Logan.getAllFilesInfo()
         if (!map.isNullOrEmpty()) {
-//            Logan.s(
-//                SEND_URL,
-//                SimpleDateFormat("yyyy-MM-dd").format(Date()),
-//                app!!.applicationContext.packageName,
-//                "Android",
-//                getModel(),
-//                android.os.Build.VERSION.RELEASE,
-//                getVersionName(app!!.applicationContext)
-//            ) { statusCode, data ->
-//                val resultData = if (data != null) String(data) else ""
-//                Log.d(TAG, "upload result, httpCode: $statusCode, details: $resultData")
-//                io.reactivex.Observable.just(statusCode)
-//                    .compose(observableIO2Main())
-//                    .subscribe {
-//                        val text = if (it == 200) "上传成功" else "上传失败 $resultData"
-//                        toast(app!!.applicationContext, Toast.LENGTH_SHORT) { text }
-//                        deleteFile()
-//                    }
-//            }
+            Logan.s(
+                SEND_URL,
+                SimpleDateFormat("yyyy-MM-dd").format(Date()),
+                app!!.applicationContext.packageName,
+                "Android",
+                getModel(),
+                android.os.Build.VERSION.RELEASE,
+                getVersionName(app!!.applicationContext)
+            ) { statusCode, data ->
+                val resultData = if (data != null) String(data) else ""
+                Log.d(TAG, "upload result, httpCode: $statusCode, details: $resultData")
+                Observable.just(statusCode)
+                    .compose(observableIO2Main())
+                    .subscribe {
+                        val text = if (it == 200) "上传成功" else "上传失败 $resultData"
+                        toast(app!!.applicationContext, Toast.LENGTH_SHORT) { text }
+                        deleteFile()
+                    }
+            }
         } else {
-//            toast(app!!.applicationContext, Toast.LENGTH_SHORT) { "暂无日志信息" }
+            toast(app!!.applicationContext, Toast.LENGTH_SHORT) { "暂无日志信息" }
         }
     }
 
@@ -181,7 +177,7 @@ object LogMgr {
      */
     @SuppressLint("CheckResult")
     fun deleteFile() {
-        io.reactivex.Observable.create<Boolean> {
+        Observable.create<Boolean> {
             if (path != null) {
                 val file = File(path!!)
                 if (file.exists()) {
@@ -192,7 +188,7 @@ object LogMgr {
             }
         }.compose(observableIO2Main())
             .subscribe {
-//                toast(app!!.applicationContext, Toast.LENGTH_SHORT) { "日志文件已删除" }
+                toast(app!!.applicationContext, Toast.LENGTH_SHORT) { "日志文件已删除" }
             }
     }
 

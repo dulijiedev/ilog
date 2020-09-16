@@ -7,7 +7,7 @@ import android.util.Log
 import android.widget.Toast
 import com.dianping.logan.Logan
 import com.dianping.logan.LoganConfig
-import io.reactivex.Observable.just
+import io.reactivex.Observable
 import org.json.JSONObject
 import java.io.File
 import java.text.SimpleDateFormat
@@ -129,7 +129,7 @@ object MyLogMgr {
             val logStr =
                 "[${log.majorModule}][${log.mark}][${log.subModule}](${log.result}) ${if (log.params != null) JSONObject(log.params).toString()  else ""} $logEntity"
             println(logStr)
-//            Logan.w(logStr, log.level?.value ?: 1)
+            Logan.w(logStr, log.level?.value ?: 1)
         }else{
             println("当前log日志等级为:${log.level?.name}:${log.level?.value},日志写入最低等级：${MIN_LEVEL.name}:${MIN_LEVEL.value} 日志被拦截")
         }
@@ -163,12 +163,12 @@ object MyLogMgr {
                     .compose(observableIO2Main())
                     .subscribe {
                         val text = if (it == 200) "上传成功" else "上传失败 $resultData"
-//                        toast(app!!.applicationContext, Toast.LENGTH_SHORT) { text }
+                        toast(app!!.applicationContext, Toast.LENGTH_SHORT) { text }
                         deleteLoganFile()
                     }
             }
         } else {
-//            toast(app!!.applicationContext, Toast.LENGTH_SHORT) { "暂无日志信息" }
+            toast(app!!.applicationContext, Toast.LENGTH_SHORT) { "暂无日志信息" }
         }
     }
 
@@ -188,7 +188,7 @@ object MyLogMgr {
             }
         }.compose(observableIO2Main())
             .subscribe {
-//                toast(app!!.applicationContext, Toast.LENGTH_SHORT) { "日志文件已删除" }
+                toast(app!!.applicationContext, Toast.LENGTH_SHORT) { "日志文件已删除" }
             }
     }
 }

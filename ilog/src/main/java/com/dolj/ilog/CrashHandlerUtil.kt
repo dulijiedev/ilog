@@ -1,21 +1,17 @@
+@file:Suppress("DEPRECATION", "RECEIVER_NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
+
 package com.dolj.ilog
 
 import android.content.Context
 import android.content.pm.PackageManager
 import android.os.Build
-import android.os.Environment
 import android.os.Looper
 import android.util.Log
 import android.widget.Toast
-
-import java.io.File
-import java.io.FileOutputStream
 import java.io.PrintWriter
 import java.io.StringWriter
-import java.text.SimpleDateFormat
-import java.util.Date
-import java.util.HashMap
-import java.util.Locale
+//import java.text.SimpleDateFormat
+import java.util.*
 
 
 /**
@@ -33,7 +29,7 @@ class CrashHandlerUtil private constructor() : Thread.UncaughtExceptionHandler {
     private val infos = HashMap<String, String>()
 
     //用于格式化日期,作为日志文件名的一部分
-    private val formatter = SimpleDateFormat("yyyy-MM-dd-HH-mm-ss", Locale.CHINA)
+//    private val formatter = SimpleDateFormat("yyyy-MM-dd-HH-mm-ss", Locale.CHINA)
     var crashTip = "很抱歉，程序出现异常，即将退出！"
 
     /**
@@ -118,7 +114,7 @@ class CrashHandlerUtil private constructor() : Thread.UncaughtExceptionHandler {
      *
      * @param ctx 上下文
      */
-    fun collectDeviceInfo(ctx: Context?) {
+    private fun collectDeviceInfo(ctx: Context?) {
         try {
             val pm = ctx!!.packageManager
             val pi = pm.getPackageInfo(ctx.packageName, PackageManager.GET_ACTIVITIES)

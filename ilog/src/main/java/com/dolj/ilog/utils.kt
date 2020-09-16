@@ -13,11 +13,7 @@ import io.reactivex.schedulers.Schedulers
  */
 fun getModel(): String {
     var model: String? = Build.MODEL
-    if (model != null) {
-        model = model.trim { it <= ' ' }.replace("\\s*".toRegex(), "")
-    } else {
-        model = ""
-    }
+    model = model?.trim { it <= ' ' }?.replace("\\s*".toRegex(), "") ?: ""
     return model
 }
 

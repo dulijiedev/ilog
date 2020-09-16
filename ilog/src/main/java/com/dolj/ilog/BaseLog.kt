@@ -76,7 +76,7 @@ class BaseLog(builder: Builder) {
         }
 
         fun getResult():  String? {
-            return result.getOrElse { it->it.message }
+            return result.getOrElse { it.message }
         }
 
         fun setMajorModule(majorModule: String?): Builder {

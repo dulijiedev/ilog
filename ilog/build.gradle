@@ -60,7 +60,7 @@ uploadArchives {
             }
             pom.groupId = "com.dolj.ilog"
             pom.artifactId = "ilog"
-            pom.version = "0.0.4-SNAPSHOT"
+            pom.version = "0.0.5-SNAPSHOT"
         }
     }
 }
